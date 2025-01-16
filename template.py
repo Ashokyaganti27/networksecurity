@@ -17,7 +17,9 @@ list_of_files=[
     "networksecurity/pipeline/__init__.py",
     "networksecurity/config/__init__.py",
     "networksecurity/logging/__init__.py",
+    "networksecurity/logging/logger.py",
     "networksecurity/exceptions/__init__.py",
+    "networksecurity/exceptions/exception.py",
     "setup.py",
     "DockerFile",
 ]
