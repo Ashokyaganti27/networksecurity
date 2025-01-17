@@ -4,7 +4,7 @@ from networksecurity.logging.logger import logger
 ####configuration of the Data Ingestion Config
 
 from networksecurity.entity.config_entity import DataIngestionConfig
-from networksecurity.entity.artifact_entity import Artifactconfig
+from networksecurity.entity.artifact_entity import DataIngestionArtifact
 import os
 import sys
 import pymongo
@@ -91,7 +91,7 @@ class DataIngestion:
             data=self.export_data_into_featue_store(dataframe)
             self.split_data_as_train_test(data)
 
-            artifactdataconfig=Artifactconfig(
+            artifactdataconfig=DataIngestionArtifact(
                 train_data_path=self.data_ingestion_config.training_file_path,
                 test_data_path=self.data_ingestion_config.testing_file_path
 
