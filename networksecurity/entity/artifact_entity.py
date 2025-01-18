@@ -20,3 +20,16 @@ class DatavalidationArtifact:
 class DataTransfirmationArtifact:
     train_numpy_path:str
     test_numpy_path:str
+
+
+@dataclass
+class classificationmetricArtifact:
+    f1_score: float
+    precision_score: float
+    recall_score: float
+
+@dataclass
+class ModelTrainerArtifact:
+    model_trained_path:str
+    train_metric_artifact: classificationmetricArtifact
+    test_metric_artifact: classificationmetricArtifact

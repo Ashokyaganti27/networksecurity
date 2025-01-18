@@ -22,7 +22,7 @@ class DataValidation:
 
         no_of_columns=len(self.schema["columns"])
         logger.info(f"required no of column :{no_of_columns}")
-        logger.info(f"data frame {dataframe} has :{len(dataframe.columns)} columns")
+        logger.info(f"data frame  has :{len(dataframe.columns)} columns")
         
         if len(dataframe.columns)==no_of_columns:
             return True

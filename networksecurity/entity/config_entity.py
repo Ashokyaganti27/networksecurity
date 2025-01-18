@@ -72,5 +72,18 @@ class DataTransformationconfig:
 
         )
 
+class Modeltrainerconfig:
+    def __init__(self,model_trainer_config:TrainingPipelineconfi):
+        self.model_trainer=model_trainer_config
+        self.model_trainer_dir:str =os.path.join(self.model_trainer.artifact_dir,training_pipeline.MODEL_TRAINER_DIR_NAME)
 
+        self.model_trainer_trained_dir:str =os.path.join(self.model_trainer_dir,training_pipeline.MODEL_TRAINER_TRAINED_DIR_NAME)
+
+        self.model_name_path:str =os.path.join(self.model_trainer_trained_dir,training_pipeline.MODEL_TRAINER_TRAINED_MODEL_NAME)
+
+        self.model_excepted_score:float =training_pipeline.MODEL_TRAINER_EXCEPTED_SCORE
+
+        
+
+        
 
