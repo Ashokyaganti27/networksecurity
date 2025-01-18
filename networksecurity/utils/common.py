@@ -2,7 +2,7 @@ import yaml
 import os
 import sys
 from networksecurity.exceptions.exception import NetworkSecurityException
-
+import numpy as np
 def read_yaml_file(filepath:str) ->dict:
     try:
         with open(filepath,"rb") as yamlfile:
@@ -20,3 +20,15 @@ def write_yaml_file(filepath: str, content: dict):
             yaml.dump(content, yamlfile)
     except Exception as e:
         raise NetworkSecurityException(e, sys)
+
+
+def save_to_numpy_array(dataframe,path):
+    try:
+        data=dataframe.to_numpy()
+
+        np.save(path,data)
+
+    except Exception as e:
+       raise NetworkSecurityException(e,sys)
+
+

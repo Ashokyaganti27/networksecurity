@@ -55,7 +55,22 @@ class DataValidationConfig:
         )
         
 
+class DataTransformationconfig:
+    def __init__(self,data_transformation_config:TrainingPipelineconfi):
+
+        self.data_transformation_config=data_transformation_config
+
+        self.data_transformation_dir=os.path.join(self.data_transformation_config.artifact_dir,training_pipeline.DATA_TRANSFORMATION_DIR)
         
+        self.data_transformation_transformed_dir=os.path.join(self.data_transformation_dir,training_pipeline.DATA_TRANSFORMATION_SUB_DIR)
+
+        self.data_transformation_train_path=os.path.join(
+            self.data_transformation_transformed_dir,training_pipeline.DATA_TRANSFORMATION_TRAIN_NUMPY_ARRAY)
+        
+        self.data_transformation_test_path=os.path.join(
+            self.data_transformation_transformed_dir,training_pipeline.DATA_TRANSFORMATION_TEST_NUMPY_ARRAY
+
+        )
 
 
 
