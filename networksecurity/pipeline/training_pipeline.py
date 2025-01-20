@@ -7,8 +7,9 @@ from networksecurity.components.data_transformation import DataTransformation
 from networksecurity.components.model_trainer import Modeltrainer
 from networksecurity.entity.config_entity import DataIngestionConfig,TrainingPipelineconfi,DataValidationConfig,DataTransformationconfig,Modeltrainerconfig
 from networksecurity.entity.artifact_entity import DataIngestionArtifact,DataTransfirmationArtifact,DatavalidationArtifact,ModelTrainerArtifact
-from networksecurity.constants.training_pipeline import BUCKET_NAME
+from networksecurity.constants.training_pipeline import BUCKET_NAME,FINAL_MODEL
 from networksecurity.cloud.s3_syncer import s3sync
+import os
 
 class TrainingPipeline:
     def __init__(self):
@@ -79,9 +80,11 @@ class TrainingPipeline:
     def sync_final_model_to_s3(self):
         try:
             aws_bucket_url=f"s3://{BUCKET_NAME}/final_model/{self.training_pipeline_config.timestap}"
-            self.s3syncer.sync_folder_to_s3(folder="final_model/model.pkl",aws_bucket_url=aws_bucket_url)
+
+            self.s3syncer.sync_folder_to_s3(folder=FINAL_MODEL,aws_bucket_url=aws_bucket_url)
         except Exception as e:
             raise NetworkSecurityException(e,sys)
+
 
     def run_pipeline(self)->ModelTrainerArtifact:
         try:

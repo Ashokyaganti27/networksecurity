@@ -12,6 +12,7 @@ TRAINE_FILE_NAME:str ="train.csv"
 TEST_FILE_NAME:str ="test.csv"
 
 BUCKET_NAME="networkbucket1"
+FINAL_MODEL=os.path.join("final_model")
 
 SCHEMA_FILE_PATH=os.path.join("data_schema","schema.yaml")
 

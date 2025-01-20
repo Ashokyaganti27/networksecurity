@@ -104,6 +104,7 @@ class Modeltrainer:
             os.makedirs("final_model",exist_ok=True)
             with open("final_model/model.pkl","wb") as file:
                 pickle.dump(best_model,file)
+                file.close()
 
 
             
