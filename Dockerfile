@@ -7,7 +7,7 @@ RUN apt update -y && apt install awscli -y
 
 RUN apt-get update && pip install -r requirements.txt
 
-CMD ["python","networksecurity\pipeline\training_pipeline.py"]
+CMD ["python","networksecurity/pipeline/training_pipeline.py"]
 
 
 
