@@ -102,7 +102,7 @@ class Modeltrainer:
 
             ##saving into final_model
             os.makedirs("final_model",exist_ok=True)
-            with open("final_model\model.pkl","wb") as file:
+            with open("final_model/model.pkl","wb") as file:
                 pickle.dump(best_model,file)
 
 
