@@ -12,6 +12,10 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import AdaBoostClassifier,GradientBoostingClassifier,RandomForestClassifier
 from networksecurity.utils.common import evaluate_model
 import pickle
+import mlflow
+
+import dagshub
+dagshub.init(repo_owner='YagantiAshok177', repo_name='networksecurity', mlflow=True)
 
 class Modeltrainer:
     def __init__(self,data_tans_artifact:DataTransfirmationArtifact,model_trainer_config:Modeltrainerconfig):
@@ -22,6 +26,23 @@ class Modeltrainer:
         except Exception as e:
             raise NetworkSecurityException(e,sys)
     
+
+
+    def track_mlflow(self,best_model,classification_report):
+
+        mlflow.set_experiment("NetWorkSecurity_Models")  
+        with mlflow.start_run():
+
+            f1_score=classification_report.f1_score
+            precision=classification_report.precision_score
+            recall_score=classification_report.recall_score
+
+            mlflow.log_metric("f1_score",f1_score)
+            mlflow.log_metric("precision",precision)
+            mlflow.log_metric("recall",recall_score)
+
+            mlflow.sklearn.log_model(best_model,"model")
+
 
     def train_model(self,x_train,y_train,x_test,y_test):
         try:
@@ -53,11 +74,20 @@ class Modeltrainer:
 
             logger.info("classification report for train data success")
 
+
+
             y_test_pred=best_model.predict(x_test)
 
             classification_xtest_metric=get_classification_score(y_true=y_test,y_pred=y_test_pred)
 
             logger.info("classification report for test data success")
+
+
+            ####mlflow tracking 
+
+
+            self.track_mlflow(best_model=best_model,classification_report=classification_xtest_metric)
+
 
             dir_name=self.model_trainer_config.model_name_path
 
@@ -69,6 +99,13 @@ class Modeltrainer:
 
             with open(self.model_trainer_config.model_name_path,"wb") as file:
                 pickle.dump(best_model,file)
+
+            ##saving into final_model
+            os.makedirs("final_model",exist_ok=True)
+            with open("final_model\model.pkl","wb") as file:
+                pickle.dump(best_model,file)
+
+
             
             model_trainer_artifact=ModelTrainerArtifact(
                 model_trained_path=self.model_trainer_config.model_name_path,

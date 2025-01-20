@@ -13,7 +13,7 @@ def read_yaml_file(filepath:str) ->dict:
         raise NetworkSecurityException(e,sys)
 
 
-def write_yaml_file(filepath: str, content: dict):
+def write_yaml_file(filepath: str, content):
     try:
         dir_name = os.path.dirname(filepath)
         os.makedirs(dir_name, exist_ok=True)  # Ensure the directory exists
